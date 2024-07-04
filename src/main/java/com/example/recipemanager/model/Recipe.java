@@ -14,11 +14,21 @@ public class Recipe implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false, updatable = false) //id column can not be null or updated
-    private Long id;
+    private Long id; //primary key
 
     private String name;
     private String description;
     private String imageUrl;
+
+    public String getRecipeCode() {
+        return recipeCode;
+    }
+
+    public void setRecipeCode(String recipeCode) {
+        this.recipeCode = recipeCode;
+    }
+
+    private String recipeCode;
 
     public Recipe(){} //no argument constructor
     // Creates an instance of Recipe class without providing any initial values for its fields
@@ -30,10 +40,11 @@ public class Recipe implements Serializable {
 // libraries rely on a no-argument constructor to reconstruct the object.
 
 
-    public Recipe(String name, String description, String imageUrl) {
+    public Recipe(String name, String description, String imageUrl, String recipeCode) {
         this.name = name;
         this.description = description;
         this.imageUrl = imageUrl;
+        this.recipeCode = recipeCode;
     }    // Constructor with parameters
 
     public Long getId() {
