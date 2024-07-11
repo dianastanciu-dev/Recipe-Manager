@@ -1,3 +1,7 @@
+HTTP Process
+
+GET Requests: The client makes GET requests to the RecipeResource endpoints.
+
 Controller (Resource Layer):
 
 RecipeResource controller handles the incoming GET request. It is annotated with @RestController and request mapping annotations like @GetMapping.
@@ -11,3 +15,5 @@ Methods in the service layer (like findAllRecipes and findRecipeById) fetch data
 Repository Layer:
 
 The repository layer interacts with the database. 
+
+JSON Domain Objects: The data fetched from the database is returned as domain objects (Recipe) and automatically converted to JSON by Spring before being sent to the client.
