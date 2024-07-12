@@ -4,12 +4,16 @@ import com.example.recipemanager.model.Recipe;
 import com.example.recipemanager.service.RecipeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 //Resource Layer: Handles HTTP requests and responses
 
@@ -32,7 +36,7 @@ public RecipeResource(RecipeService recipeService) { //constructor for the Recip
 
 }
 
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<Recipe>> getAllRecipe(){
 
     //List is a generic collection type in Java,
@@ -50,6 +54,28 @@ public RecipeResource(RecipeService recipeService) { //constructor for the Recip
         return new ResponseEntity<>(recipe, HttpStatus.OK);
         //The data returned from the service layer is passed back to the controller, which wraps it in a ResponseEntity.
     }
+
+
+    @PostMapping("/add")  //making a change in the backend with POST method, adding a new recipe
+    public ResponseEntity<Recipe>  addEmployee(@RequestBody Recipe recipe) {
+       Recipe newRecipe = recipeService.addRecipe(recipe);
+       return new ResponseEntity<>(newRecipe, HttpStatus.CREATED); //Returns response CREATED to the frontend
+    }
+    
+
+
+    @PutMapping("/update") //PUT method to update a recipe
+    public ResponseEntity<Recipe> updateEmployee(@RequestBody Recipe recipe) {
+       Recipe newRecipe = recipeService.updateRecipe(recipe);
+       return new ResponseEntity<>(updateRecipe, HttpStatus.OK); //Returns response OK to the frontend
+    }
+
+    @DeleteMapping("delete/{id}")
+    public ResponseEntity<?> deleteEmployee(@PathVariable("id") Long id) {
+        recipeService.deleteRecipe(id);
+        return new ResponseEntity<>(HttpStatus.OK); //Returns response OK to the frontend
+    }
+
 
 
 }
