@@ -1,23 +1,18 @@
-import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from  '@angular/core';
-//import {FormModule} from '@angular/forms';
-import [HttpModule] from '@angular/http';
-
-import {AppComponent} from './app.component';
-import {RecipeService} from './recipe.service';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http'; 
+import { AppComponent } from './app.component';
+import { RecipeService } from './recipe.service'; 
 
 @NgModule({
-
-    declarations: [
-        AppComponent,
-        RecipeService
-    ],
-    imports: [
-        BrowserModule,
-        //FormsModule,
-        HttpModule
-    ],
-    providers: [],
-    bootstrap: [AppComponent]
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    HttpClientModule // Keep this for HTTP requests
+  ],
+  providers: [RecipeService], // Provide the service if needed in non-standalone components
+  bootstrap: [AppComponent]
 })
-export class AppModule{   }
+export class AppModule { }

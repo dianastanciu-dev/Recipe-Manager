@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { Recipe } from './recipe'; //Recipe model
 import { RecipeService } from './recipe.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { CommonModule } from '@angular/common';  
+import { HttpClientModule } from '@angular/common/http';  
+import { Recipe } from './recipe'; //Recipe model
+
 //This component fetches a list of recipes from a backend service when it initializes and 
 //makes this data available for use in the component's template.
 
@@ -9,13 +13,13 @@ import { RecipeService } from './recipe.service';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet,  CommonModule, HttpClientModule],
   templateUrl: './app.component.html', //Points to the HTML file that defines the view for this component
-  styleUrl: './app.component.css' //Points to the CSS file that styles this component.
+  styleUrls: ['./app.component.css'] //Points to the CSS file that styles this component.
 })
 export class AppComponent implements OnInit {
   //implements OnInit: Indicates that this component uses the OnInit lifecycle hook
-  public recipes: Recipe[]; 
+  public recipes: Recipe[] = []; //Initialized with an empty array
   //public (will be used in html file) property "recipes" will hold an array of objects (Recipe) coming from the backend 
 
   constructor(private recipeService: RecipeService){ } 
